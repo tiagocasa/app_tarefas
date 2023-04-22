@@ -22,7 +22,7 @@ ThemeData get lightTheme => ThemeData(
       segmentedButtonTheme: _segmentedButtonTheme,
       floatingActionButtonTheme: FloatingActionButtonThemeData(
         backgroundColor: _lightColorScheme.primary,
-        foregroundColor: Colors.white,
+        foregroundColor: _lightColorScheme.onPrimary,
       ),
     );
 

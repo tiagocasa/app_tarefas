@@ -11,4 +11,5 @@ LocalConfiguration config = Configuration.local(
   initialDataCallback: (realm) {
     realm.add(ConfigurationModel('system'));
   },
+  schemaVersion: 2,
 );

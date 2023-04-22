@@ -24,7 +24,7 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       body: Center(
-        child: Column(
+        child: Stack(
           children: [
             Padding(
               padding: const EdgeInsets.all(8),

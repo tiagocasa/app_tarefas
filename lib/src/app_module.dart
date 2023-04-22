@@ -10,11 +10,14 @@ import 'configuration/services/configuration_service.dart';
 class AppModule extends Module {
   @override
   List<Bind> get binds => [
-        Bind.instance(Realm(config)),
+        //Bind.instance<Realm>(Realm(config)),
+        Bind.factory<Realm>((i) => Realm(config)),
         Bind.factory<ConfigurationService>(
           (i) => ConfigurationServiceImpl(i()),
         ),
-        Bind.singleton((i) => AppStore.new),
+        Bind.singleton(
+          (i) => AppStore(i()),
+        ),
       ];
 
   @override

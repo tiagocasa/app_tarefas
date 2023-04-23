@@ -89,7 +89,7 @@ class TaskCard extends StatelessWidget {
             children: [
               Icon(
                 iconData,
-                color: theme.iconTheme.color?.withOpacity(0.5),
+                color: theme.iconTheme.color?.withOpacity(0.4),
               ),
               const Spacer(),
               Text(

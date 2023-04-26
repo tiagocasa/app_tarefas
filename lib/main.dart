@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
-import 'package:rx_notifier/rx_notifier.dart';
-import 'package:tarefas/src/app_module.dart';
+import 'package:provider/provider.dart';
 import 'package:tarefas/src/app_widget.dart';
+import 'package:tarefas/src/shared/stores/theme_store.dart';
 
 void main() {
   runApp(
-    RxRoot(
-      child: ModularApp(
-        module: AppModule(),
-        child: const AppWidget(),
-      ),
+    MultiProvider(
+      providers: [
+        Provider<ThemeStore>(
+          create: (_) => ThemeStore(),
+        ),
+      ],
+      builder: (context, child) {
+        return const AppWidget();
+      },
     ),
   );
 }

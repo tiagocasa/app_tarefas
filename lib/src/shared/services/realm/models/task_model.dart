@@ -1,18 +1,18 @@
-import 'package:realm/realm.dart';
-part 'task_model.g.dart';
+//import 'package:realm/realm.dart';
+//part 'task_model.g.dart';
 
-@RealmModel()
+//@RealmModel()
 class _Task {
-  @PrimaryKey()
-  late Uuid id;
+  //@PrimaryKey()
+  //late Uuid id;
   late String description;
   bool isCompleted = false;
 }
 
-@RealmModel()
+//@RealmModel()
 class _TaskBoard {
-  @PrimaryKey()
-  late Uuid id;
+  //@PrimaryKey()
+  //late Uuid id;
   late String title;
   late List<_Task> tasks;
   bool enable = true;

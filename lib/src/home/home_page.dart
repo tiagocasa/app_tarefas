@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:realm/realm.dart';
+//import 'package:realm/realm.dart';
 import 'package:tarefas/src/home/widgets/custom_drawer.dart';
 import 'package:tarefas/src/shared/widgets/user_image_button.dart';
 
@@ -31,19 +31,11 @@ class _HomePageState extends State<HomePage> {
         child: Stack(
           children: [
             ListView.separated(
-              padding: const EdgeInsets.fromLTRB(50, 50, 50, 100),
+              padding: const EdgeInsets.fromLTRB(50, 80, 50, 100),
               itemCount: 15,
               itemBuilder: (_, index) {
-                final board = TaskBoard(
-                  Uuid.v4(),
-                  'Nova Lista de Tarefas 1',
-                  tasks: [
-                    Task(Uuid.v4(), '', isCompleted: true),
-                    Task(Uuid.v4(), '', isCompleted: true),
-                    Task(Uuid.v4(), ''),
-                  ],
-                );
-                return TaskCard(board: board);
+                final board = Container();
+                //return TaskCard(board: board);
               },
               separatorBuilder: (context, index) {
                 return const SizedBox(
@@ -59,7 +51,7 @@ class _HomePageState extends State<HomePage> {
                   segments: const [
                     ButtonSegment(
                       value: 0,
-                      label: Text('Todos'),
+                      label: Text('Todas'),
                     ),
                     ButtonSegment(
                       value: 1,
@@ -86,7 +78,7 @@ class _HomePageState extends State<HomePage> {
         icon: const Icon(Icons.edit),
         label: const Text('Nova Lista'),
         onPressed: () {
-          Navigator.of(context).pushNamed('./edit');
+          Navigator.of(context).pushNamed('/edit');
         },
       ),
     );

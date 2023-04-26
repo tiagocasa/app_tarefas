@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
-import 'package:rx_notifier/rx_notifier.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:provider/provider.dart';
+import 'package:tarefas/src/configuration/configuration_page.dart';
+import 'package:tarefas/src/home/edit_task_board_page.dart';
+import 'package:tarefas/src/home/home_page.dart';
+import 'package:tarefas/src/shared/stores/theme_store.dart';
 import 'package:tarefas/src/shared/themes/themes.dart';
-
-import 'configuration/services/configuration_service.dart';
-import 'shared/stores/app_store.dart';
 
 class AppWidget extends StatefulWidget {
   const AppWidget({super.key});
@@ -14,29 +15,27 @@ class AppWidget extends StatefulWidget {
 }
 
 class _AppWidgetState extends State<AppWidget> {
-  final config = Modular.get<ConfigurationService>();
-  final appStore = Modular.get<AppStore>();
+  ThemeStore themeStore = ThemeStore();
 
-  @override
-  void initState() {
-    super.initState();
-    config.init();
-  }
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    Modular.setInitialRoute('/home/');
-    final themeMode = context.select(() => appStore.themeMode.value);
-
-    return MaterialApp.router(
-      title: 'Minhas Tarefas',
-      debugShowCheckedModeBanner: false,
-      themeMode: themeMode,
-      theme: lightTheme,
-      darkTheme: darkTheme,
-      routerDelegate: Modular.routerDelegate,
-      routeInformationParser: Modular.routeInformationParser,
+    final themeStore = Provider.of<ThemeStore>(context);
+    return Observer(
+      builder: (_) {
+        return MaterialApp(
+          title: 'Minhas Tarefas',
+          debugShowCheckedModeBanner: false,
+          theme: lightTheme,
+          darkTheme: darkTheme,
+          themeMode: themeStore.mode,
+          home: const HomePage(),
+          routes: {
+            '/home': (context) => const HomePage(),
+            '/config': (context) => const ConfigurationPage(),
+            '/edit': (context) => const EditTaskBoardPage()
+          },
+        );
+      },
     );
   }
 }

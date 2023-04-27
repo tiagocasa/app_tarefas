@@ -77,7 +77,7 @@ class DatabaseHelper {
     final tasks = await db.query(
       'taskItens',
       orderBy: 'id',
-      where: 'id = ?',
+      where: 'parentId = ?',
       whereArgs: [parentId],
     );
     final List<Task> task =

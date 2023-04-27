@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-//import 'package:realm/realm.dart';
 import 'package:tarefas/src/home/widgets/custom_drawer.dart';
+import 'package:tarefas/src/home/widgets/task_card.dart';
 import 'package:tarefas/src/shared/widgets/user_image_button.dart';
-
-import '../shared/services/realm/models/task_model.dart';
-import 'widgets/task_card.dart';
+import '../shared/services/database_helper.dart';
+import 'models/task_board.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -30,17 +29,26 @@ class _HomePageState extends State<HomePage> {
       body: Center(
         child: Stack(
           children: [
-            ListView.separated(
-              padding: const EdgeInsets.fromLTRB(50, 80, 50, 100),
-              itemCount: 15,
-              itemBuilder: (_, index) {
-                final board = Container();
-                //return TaskCard(board: board);
-              },
-              separatorBuilder: (context, index) {
-                return const SizedBox(
-                  height: 15,
-                );
+            //TODO: vER NA AULA DO FLUTERAANDO O PADDING SO PRO INICIO DA LISTVIEW
+            FutureBuilder<List<TaskBoard>>(
+              future: DatabaseHelper.instance.getTasks(),
+              builder: (
+                BuildContext context,
+                AsyncSnapshot<List<TaskBoard>> snapshot,
+              ) {
+                if (!snapshot.hasData) {
+                  return const Text(
+                      'Loading'); //TODO: MUDAR PRA QUELE LOADING DA UDEMY
+                }
+                return snapshot.data!.isEmpty
+                    ? const Center(child: Text('No Data to Display'))
+                    : ListView(
+                        children: snapshot.data!.map(
+                          (taskBoard) {
+                            return TaskCard(board: taskBoard);
+                          },
+                        ).toList(),
+                      );
               },
             ),
             Align(
@@ -77,8 +85,11 @@ class _HomePageState extends State<HomePage> {
       floatingActionButton: FloatingActionButton.extended(
         icon: const Icon(Icons.edit),
         label: const Text('Nova Lista'),
-        onPressed: () {
-          Navigator.of(context).pushNamed('/edit');
+        onPressed: () async {
+          await DatabaseHelper.instance.add(
+            TaskBoard(name: 'Teste'),
+          ); //Criar caixinha com textfield Inserir cancelar
+          setState(() {});
         },
       ),
     );

@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:tarefas/src/configuration/configuration_page.dart';
 import 'package:tarefas/src/home/edit_task_board_page.dart';
 import 'package:tarefas/src/home/home_page.dart';
+import 'package:tarefas/src/home/stores/task_store.dart';
 import 'package:tarefas/src/shared/stores/theme_store.dart';
 import 'package:tarefas/src/shared/themes/themes.dart';
 
@@ -15,8 +16,6 @@ class AppWidget extends StatefulWidget {
 }
 
 class _AppWidgetState extends State<AppWidget> {
-  ThemeStore themeStore = ThemeStore();
-
   @override
   Widget build(BuildContext context) {
     final themeStore = Provider.of<ThemeStore>(context);
@@ -32,7 +31,8 @@ class _AppWidgetState extends State<AppWidget> {
           routes: {
             '/home': (context) => const HomePage(),
             '/config': (context) => const ConfigurationPage(),
-            '/edit': (context) => const EditTaskBoardPage()
+            '/edit': (context) => const EditTaskBoardPage(),
+            //'/newlist': (context) => const NewListPage()
           },
         );
       },

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 
-import '../shared/stores/theme_store.dart';
+import '../../shared/stores/theme_store.dart';
 
 class ConfigurationPage extends StatefulWidget {
   const ConfigurationPage({super.key});
@@ -57,9 +57,7 @@ class _ConfigurationPageState extends State<ConfigurationPage> {
                       'Escuro',
                       style: Theme.of(context).textTheme.bodyLarge,
                     ),
-                    onChanged: (model) {
-                      themeStore.changeThemeMode(model);
-                    },
+                    onChanged: themeStore.changeThemeMode,
                   ),
                   const SizedBox(
                     height: 20,

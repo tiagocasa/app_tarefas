@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../stores/task_store.dart';
-import '../models/task_board.dart';
+
+import '../models/task_board_model.dart';
+import '../stores/task_board_store.dart';
 
 enum TaskCardStatus {
   pending(Icons.access_time, 'Pendente'),
@@ -15,9 +16,9 @@ enum TaskCardStatus {
 }
 
 class TaskCard extends StatelessWidget {
-  final TaskBoard board;
-
-  const TaskCard({super.key, required this.board});
+  final TaskBoardModel board;
+  final Future<int>? callback;
+  const TaskCard({super.key, required this.board, this.callback});
 
   // double getProgress(List<Task> tasks) {
   //   if (tasks.isEmpty) return 0;
@@ -33,8 +34,8 @@ class TaskCard extends StatelessWidget {
   //   return '$completes / ${tasks.length}';
   // }
 
-  TaskCardStatus getStatus(TaskBoard board, double progress) {
-    if (!board.isActive) {
+  TaskCardStatus getStatus(TaskBoardModel board, double progress) {
+    if (board.isActive ?? false) {
       return TaskCardStatus.disabled;
     } else if (progress < 1.0) {
       return TaskCardStatus.pending;
@@ -83,10 +84,10 @@ class TaskCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: GestureDetector(
-        onTap: () {
-          taskStore.changeTask(board.id);
-          Navigator.of(context).pushNamed('/edit');
+        onLongPress: () {
+          print('deletado');
         },
+        onTap: () {},
         child: Container(
           height: 130,
           decoration: BoxDecoration(
@@ -115,7 +116,7 @@ class TaskCard extends StatelessWidget {
               ),
               const Spacer(),
               Text(
-                title,
+                title ?? 'Sem nome',
                 style: theme.textTheme.titleMedium?.copyWith(),
               ),
               if (true)

@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:provider/provider.dart';
-import 'package:tarefas/src/configuration/configuration_page.dart';
-import 'package:tarefas/src/home/edit_task_board_page.dart';
-import 'package:tarefas/src/home/home_page.dart';
-import 'package:tarefas/src/home/stores/task_store.dart';
-import 'package:tarefas/src/shared/stores/theme_store.dart';
-import 'package:tarefas/src/shared/themes/themes.dart';
+import 'shared/stores/theme_store.dart';
+import 'shared/themes/themes.dart';
 
 class AppWidget extends StatefulWidget {
   const AppWidget({super.key});
@@ -18,22 +15,18 @@ class AppWidget extends StatefulWidget {
 class _AppWidgetState extends State<AppWidget> {
   @override
   Widget build(BuildContext context) {
+    Modular.setInitialRoute('/home/');
     final themeStore = Provider.of<ThemeStore>(context);
     return Observer(
       builder: (_) {
-        return MaterialApp(
+        return MaterialApp.router(
           title: 'Minhas Tarefas',
           debugShowCheckedModeBanner: false,
           theme: lightTheme,
           darkTheme: darkTheme,
           themeMode: themeStore.mode,
-          home: const HomePage(),
-          routes: {
-            '/home': (context) => const HomePage(),
-            '/config': (context) => const ConfigurationPage(),
-            '/edit': (context) => const EditTaskBoardPage(),
-            //'/newlist': (context) => const NewListPage()
-          },
+          routerDelegate: Modular.routerDelegate,
+          routeInformationParser: Modular.routeInformationParser,
         );
       },
     );

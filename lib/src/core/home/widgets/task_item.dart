@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 
-import '../models/task.dart';
+import '../../../shared/services/repository/task_item_repository.dart';
+import '../models/task_item_model.dart';
 
 class TaskItem extends StatelessWidget {
   const TaskItem({
     super.key,
-    required this.task,
+    //required this.task,
+    required this.callbackFunction,
   });
-  final Task task;
-
+  //final Task task;
+  final Function callbackFunction;
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -31,14 +33,17 @@ class TaskItem extends StatelessWidget {
               onChanged: null,
             ),
             const SizedBox(width: 10),
-            Text(
-              task.taskName,
-              style: theme.textTheme.bodySmall?.copyWith(),
-            ),
+            // Text(
+            //  // task.taskName,
+            //   //style: theme.textTheme.bodySmall?.copyWith(),
+            // ),
             const Spacer(),
-            Icon(
-              Icons.cancel,
-              color: color.withOpacity(0.5),
+            GestureDetector(
+              //onTap: callbackFunction(task.id),
+              child: Icon(
+                Icons.cancel,
+                color: color.withOpacity(0.5),
+              ),
             ),
           ],
         ),

@@ -11,7 +11,7 @@ class ConfigurationModel = _ConfigurationModel with _$ConfigurationModel;
 abstract class _ConfigurationModel with Store {
   final ConfigurationRepository _configurationRepository;
   _ConfigurationModel(this._configurationRepository) {
-    // init();
+    init();
   }
 
   @observable

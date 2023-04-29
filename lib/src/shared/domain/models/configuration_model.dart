@@ -11,7 +11,7 @@ class ConfigurationModel = _ConfigurationModel with _$ConfigurationModel;
 abstract class _ConfigurationModel with Store {
   final ConfigurationRepository _configurationRepository;
   _ConfigurationModel(this._configurationRepository) {
-    init();
+    // init();
   }
 
   @observable
@@ -34,7 +34,8 @@ abstract class _ConfigurationModel with Store {
 
   @action
   void save() {
-    _configurationRepository.saveConfiguration(themeMode.toString(), syncDate);
+    _configurationRepository.saveConfiguration(
+        getThemeModeName(themeMode), syncDate);
   }
 
   @action
@@ -46,5 +47,14 @@ abstract class _ConfigurationModel with Store {
 
   ThemeMode _getThemeModeByName(String name) {
     return ThemeMode.values.firstWhere((mode) => mode.name == name);
+  }
+
+  String getThemeModeName(ThemeMode? themeMode) {
+    if (themeMode?.index == 1) {
+      return 'light';
+    } else if (themeMode?.index == 2) {
+      return 'dark';
+    }
+    return 'system';
   }
 }

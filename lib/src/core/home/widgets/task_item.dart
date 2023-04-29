@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../shared/services/repository/task_item_repository.dart';
 import '../models/task_item_model.dart';
 
 class TaskItem extends StatelessWidget {

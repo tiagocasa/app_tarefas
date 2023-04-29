@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
-import '../../shared/stores/theme_store.dart';
+import '../../shared/domain/models/configuration_model.dart';
 
 class ConfigurationPage extends StatefulWidget {
   const ConfigurationPage({super.key});
@@ -14,71 +14,74 @@ class ConfigurationPage extends StatefulWidget {
 class _ConfigurationPageState extends State<ConfigurationPage> {
   @override
   Widget build(BuildContext context) {
-    final themeStore = Provider.of<ThemeStore>(context);
+    //final themeStore = context.watch<AppStore>();
+
+    final configuration = Modular.get<ConfigurationModel>();
 
     return Scaffold(
       appBar: AppBar(title: const Text('Configurações')),
       body: Padding(
-          padding: const EdgeInsets.all(30),
-          child: Observer(
-            builder: (context) {
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Tema',
-                    style: Theme.of(context).textTheme.titleMedium,
+        padding: const EdgeInsets.all(30),
+        child: Observer(
+          builder: (context) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Tema',
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                RadioListTile<ThemeMode>(
+                  value: ThemeMode.system,
+                  groupValue: configuration.themeMode,
+                  title: Text(
+                    'Sistema',
+                    style: Theme.of(context).textTheme.bodyLarge,
                   ),
-                  const SizedBox(
-                    height: 10,
+                  onChanged: configuration.changeThemeMode,
+                ),
+                RadioListTile<ThemeMode>(
+                  value: ThemeMode.light,
+                  groupValue: configuration.themeMode,
+                  title: Text(
+                    'Claro',
+                    style: Theme.of(context).textTheme.bodyLarge,
                   ),
-                  RadioListTile<ThemeMode>(
-                    value: ThemeMode.system,
-                    groupValue: themeStore.mode,
-                    title: Text(
-                      'Sistema',
-                      style: Theme.of(context).textTheme.bodyLarge,
-                    ),
-                    onChanged: themeStore.changeThemeMode,
+                  onChanged: configuration.changeThemeMode,
+                ),
+                RadioListTile<ThemeMode>(
+                  value: ThemeMode.dark,
+                  groupValue: configuration.themeMode,
+                  title: Text(
+                    'Escuro',
+                    style: Theme.of(context).textTheme.bodyLarge,
                   ),
-                  RadioListTile<ThemeMode>(
-                    value: ThemeMode.light,
-                    groupValue: themeStore.mode,
-                    title: Text(
-                      'Claro',
-                      style: Theme.of(context).textTheme.bodyLarge,
-                    ),
-                    onChanged: themeStore.changeThemeMode,
+                  onChanged: configuration.changeThemeMode,
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Text(
+                  'Controle de dados',
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                OutlinedButton(
+                  onPressed: () {}, // appStore.deleteApp,
+                  child: const Text(
+                    'Apagar cache e reiniciar o app',
                   ),
-                  RadioListTile<ThemeMode>(
-                    value: ThemeMode.dark,
-                    groupValue: themeStore.mode,
-                    title: Text(
-                      'Escuro',
-                      style: Theme.of(context).textTheme.bodyLarge,
-                    ),
-                    onChanged: themeStore.changeThemeMode,
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Text(
-                    'Controle de dados',
-                    style: Theme.of(context).textTheme.titleMedium,
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  OutlinedButton(
-                    onPressed: () {}, // appStore.deleteApp,
-                    child: const Text(
-                      'Apagar cache e reiniciar o app',
-                    ),
-                  )
-                ],
-              );
-            },
-          )),
+                )
+              ],
+            );
+          },
+        ),
+      ),
     );
   }
 }

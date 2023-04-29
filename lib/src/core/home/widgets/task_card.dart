@@ -68,7 +68,6 @@ class TaskCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final taskStore = Provider.of<TaskStore>(context);
     final theme = Theme.of(context);
     const progress = 0.5;
     const progressText = 'Pendente';

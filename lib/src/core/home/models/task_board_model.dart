@@ -1,7 +1,5 @@
 import 'package:mobx/mobx.dart';
 
-import '../../../shared/services/database_provider.dart';
-
 part 'task_board_model.g.dart';
 
 // ignore: library_private_types_in_public_api
@@ -23,26 +21,26 @@ abstract class _TaskBoardModel with Store {
     required this.name,
   });
 
-  Map<String, dynamic> toMap() {
-    final map = <String, dynamic>{
-      DatabaseProvider.columnBoardName: name,
-      DatabaseProvider.columnIsActive: isActive,
-      DatabaseProvider.columnTotalCompletedTasks: completedTasks,
-      DatabaseProvider.columnTotalTasks: tasks,
-    };
-    if (id != null) {
-      map[DatabaseProvider.columnId] = id;
-    }
-    return map;
-  }
+  // Map<String, dynamic> toMap() {
+  //   final map = <String, dynamic>{
+  //     DatabaseProvider.columnBoardName: name,
+  //     DatabaseProvider.columnIsActive: isActive,
+  //     DatabaseProvider.columnTotalCompletedTasks: completedTasks,
+  //     DatabaseProvider.columnTotalTasks: tasks,
+  //   };
+  //   if (id != null) {
+  //     map[DatabaseProvider.columnId] = id;
+  //   }
+  //   return map;
+  // }
 
-  _TaskBoardModel.fromMap(Map<String, Object?> map) {
-    id = map[DatabaseProvider.columnId] as int?;
-    name = map[DatabaseProvider.columnBoardName] as String?;
-    isActive = map[DatabaseProvider.columnIsActive] as bool?;
-    tasks = map[DatabaseProvider.columnTotalTasks] as int?;
-    completedTasks = map[DatabaseProvider.columnTotalCompletedTasks] as int?;
-  }
+  // _TaskBoardModel.fromMap(Map<String, Object?> map) {
+  //   id = map[DatabaseProvider.columnId] as int?;
+  //   name = map[DatabaseProvider.columnBoardName] as String?;
+  //   isActive = map[DatabaseProvider.columnIsActive] as bool?;
+  //   tasks = map[DatabaseProvider.columnTotalTasks] as int?;
+  //   completedTasks = map[DatabaseProvider.columnTotalCompletedTasks] as int?;
+  // }
 }
 
 // TODO : colocar uma variavel de quantidade de tasks e quantidade de tasks concluidas e progress dentro do TaskBoard

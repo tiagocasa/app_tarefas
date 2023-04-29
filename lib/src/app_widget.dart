@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:provider/provider.dart';
-import 'shared/stores/theme_store.dart';
-import 'shared/themes/themes.dart';
+import 'shared/domain/models/configuration_model.dart';
+import 'shared/presentation/themes/themes.dart';
 
 class AppWidget extends StatefulWidget {
   const AppWidget({super.key});
@@ -16,7 +15,8 @@ class _AppWidgetState extends State<AppWidget> {
   @override
   Widget build(BuildContext context) {
     Modular.setInitialRoute('/home/');
-    final themeStore = Provider.of<ThemeStore>(context);
+    //final themeStore = context.watch<AppStore>((store) => store.themeMode);
+    final configuration = Modular.get<ConfigurationModel>();
     return Observer(
       builder: (_) {
         return MaterialApp.router(
@@ -24,7 +24,7 @@ class _AppWidgetState extends State<AppWidget> {
           debugShowCheckedModeBanner: false,
           theme: lightTheme,
           darkTheme: darkTheme,
-          themeMode: themeStore.mode,
+          themeMode: configuration.themeMode,
           routerDelegate: Modular.routerDelegate,
           routeInformationParser: Modular.routeInformationParser,
         );

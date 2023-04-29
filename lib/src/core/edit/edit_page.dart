@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tarefas/src/core/home/stores/task_board_store.dart';
 import 'package:tarefas/src/core/home/widgets/task_item.dart';
-import 'package:tarefas/src/shared/services/repository/task_board_repository.dart';
-import 'package:tarefas/src/shared/services/repository/task_item_repository.dart';
-import 'package:tarefas/src/shared/widgets/user_image_button.dart';
+import 'package:tarefas/src/shared/presentation/widgets/user_image_button.dart';
 import '../home/models/task_item_model.dart';
 
 class EditTaskBoardPage extends StatefulWidget {

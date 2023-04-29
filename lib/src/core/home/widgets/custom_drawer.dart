@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:intl/intl.dart';
+
+import '../../../shared/domain/models/configuration_model.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final syncDate = null;
+    final appStore = Modular.get<ConfigurationModel>();
+    final syncDate = appStore.syncDate;
 
     var syncDateText = 'Nunca';
 
@@ -19,7 +24,7 @@ class CustomDrawer extends StatelessWidget {
       onDestinationSelected: (index) {
         if (index == 1) {
           Navigator.of(context).pop();
-          Navigator.of(context).pushNamed('/config');
+          Navigator.of(context).pushNamed('/config/');
         }
       },
       backgroundColor: Theme.of(context).colorScheme.surface,
@@ -41,9 +46,13 @@ class CustomDrawer extends StatelessWidget {
                   'Sincronizar',
                 ),
                 const Spacer(),
-                Text(
-                  syncDateText,
-                  style: Theme.of(context).textTheme.bodySmall,
+                Observer(
+                  builder: (context) {
+                    return Text(
+                      syncDateText,
+                      style: Theme.of(context).textTheme.bodySmall,
+                    );
+                  },
                 ),
               ],
             ),

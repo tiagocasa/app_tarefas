@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'shared/domain/models/configuration_model.dart';
-import 'shared/presentation/themes/themes.dart';
+import 'package:tarefas/src/core/configuration/domain/models/configuration_model.dart';
+
+import 'shared/themes/themes.dart';
 
 class AppWidget extends StatefulWidget {
   const AppWidget({super.key});

@@ -2,7 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
-import 'package:tarefas/src/shared/domain/repositories/configuration_repository.dart';
+
+import '../repositories/configuration_repository.dart';
 
 part 'configuration_model.g.dart';
 

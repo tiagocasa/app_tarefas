@@ -1,4 +1,4 @@
-import 'package:tarefas/src/shared/data/datasources/configuration_data.dart';
+import '../../data/datasources/configuration_data.dart';
 
 abstract class ConfigurationRepository {
   ConfigurationData getConfiguration();

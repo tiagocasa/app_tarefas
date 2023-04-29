@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-import '../../shared/domain/models/configuration_model.dart';
+import '../domain/models/configuration_model.dart';
 
 class ConfigurationPage extends StatefulWidget {
   const ConfigurationPage({super.key});

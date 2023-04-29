@@ -1,7 +1,7 @@
 import 'package:realm/realm.dart';
-import 'package:tarefas/src/shared/data/datasources/configuration_data.dart';
 
 import '../../domain/repositories/configuration_repository.dart';
+import '../datasources/configuration_data.dart';
 
 class ConfigurationRepositoryImpl implements ConfigurationRepository {
   final Realm realm;

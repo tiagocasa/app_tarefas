@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:tarefas/src/core/home/stores/task_board_store.dart';
 import 'package:tarefas/src/core/home/widgets/custom_drawer.dart';
-import 'package:tarefas/src/core/home/widgets/task_card.dart';
-import 'package:tarefas/src/shared/presentation/widgets/user_image_button.dart';
-import 'models/task_board_model.dart';
+import 'package:tarefas/src/shared/widgets/user_image_button.dart';
 
 //final taskBoard = TaskBoardStore.getInstance();
 

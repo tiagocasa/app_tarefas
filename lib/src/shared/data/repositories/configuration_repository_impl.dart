@@ -9,8 +9,7 @@ class ConfigurationRepositoryImpl implements ConfigurationRepository {
 
   @override
   ConfigurationData getConfiguration() {
-    realm.all<ConfigurationData>().first;
-    throw UnimplementedError();
+    return realm.all<ConfigurationData>().first;
   }
 
   @override

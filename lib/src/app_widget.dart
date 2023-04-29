@@ -17,6 +17,7 @@ class _AppWidgetState extends State<AppWidget> {
     Modular.setInitialRoute('/home/');
     //final themeStore = context.watch<AppStore>((store) => store.themeMode);
     final configuration = Modular.get<ConfigurationModel>();
+
     return Observer(
       builder: (_) {
         return MaterialApp.router(
